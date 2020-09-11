@@ -27,7 +27,7 @@
     _stackPresentation = RNSScreenStackPresentationPush;
     _stackAnimation = RNSScreenStackAnimationDefault;
     _gestureEnabled = YES;
-    _isTransitioning = NO;
+    _transitioning = NO;
     _isTop = NO;
     _replaceAnimation = RNSScreenReplaceAnimationPop;
     _dismissed = NO;
@@ -155,18 +155,18 @@
   _gestureEnabled = gestureEnabled;
 }
 
-- (void)setIsTransitioning:(BOOL)isTransitioning
+- (void)setTransitioning:(BOOL)transitioning
 {
-  if (_isTransitioning != isTransitioning) {
-    _isTransitioning = isTransitioning;
-    self.userInteractionEnabled = !_isTransitioning;
+  if (_transitioning != transitioning) {
+    _transitioning = transitioning;
+    self.userInteractionEnabled = !_transitioning;
   }
 }
 
 - (void)setIsTop:(BOOL)isTop
 {
   _isTop = isTop;
-  if (_isTop && !_isTransitioning) {
+  if (_isTop && !_transitioning) {
     [self notifyFinishTransitioning];
   }
 }
@@ -404,7 +404,7 @@ RCT_EXPORT_MODULE()
 
 RCT_EXPORT_VIEW_PROPERTY(active, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(gestureEnabled, BOOL)
-RCT_EXPORT_VIEW_PROPERTY(isTransitioning, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(transitioning, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(isTop, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(replaceAnimation, RNSScreenReplaceAnimation)
 RCT_EXPORT_VIEW_PROPERTY(stackPresentation, RNSScreenStackPresentation)
