@@ -57,6 +57,14 @@ declare module 'react-native-screens' {
      */
     enabled?: boolean;
     /**
+     * @description Value indicating that this screen is currently transitioning.
+     */
+    isTransitioning?: 0 | Animated.AnimatedInterpolation;
+    /**
+     * @description Boolean saying if the current screen is currently on top. Used in stack navigator.
+     */
+    isTop?: boolean;
+    /**
      * @description A callback that gets called when the current screen will appear. This is called as soon as the transition begins.
      */
     onWillAppear?: (e: NativeSyntheticEvent<NativeTouchEvent>) => void;
@@ -111,6 +119,10 @@ declare module 'react-native-screens' {
      * @description A prop that gives users an option to switch between using Screens for the navigator (container). All children screens should have the same value of their "enabled" prop as their container.
      */
     enabled?: boolean;
+    /**
+     * @description A prop that defines the number of desired active screens when there is no transition ongoing. Defaults to 1.
+     */
+    activeLimit?: number;
   }
 
   export interface ScreenStackProps extends ViewProps {

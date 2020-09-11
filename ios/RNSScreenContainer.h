@@ -7,4 +7,7 @@
 @end
 
 @interface RNSScreenContainerView : UIView <RNSScreenContainerDelegate>
+
+@property (nonatomic) NSNumber* activeLimit;
+
 @end

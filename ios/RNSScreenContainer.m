@@ -34,6 +34,7 @@
     _controller = [[UIViewController alloc] init];
     _needUpdate = NO;
     _manager = manager;
+    _activeLimit = [NSNumber numberWithInt:1];
     [self addSubview:_controller.view];
   }
   return self;
@@ -47,6 +48,13 @@
   if (!_needUpdate) {
     _needUpdate = YES;
     [_manager markUpdated:self];
+  }
+}
+
+- (void)setActiveLimit:(NSNumber *)activeLimit
+{
+  if ([activeLimit intValue] != [_activeLimit intValue]) {
+    _activeLimit = activeLimit;
   }
 }
 
@@ -148,8 +156,6 @@
           // for screens that were already active we want to mimick the effect UINavigationController
           // has when willMoveToWindow:nil is triggered before the animation starts
           [self prepareDetach:screen];
-          // disable interactions for the duration of transition
-          screen.userInteractionEnabled = NO;
         } else {
           [self attachScreen:screen atIndex:index];
         }
@@ -157,14 +163,13 @@
       }
     }
   }
-
-  // if we are down to one active screen it means the transitioning is over and we want to notify
-  // the transition has finished
-  if ((activeScreenRemoved || activeScreenAdded) && _activeScreens.count == 1) {
-    RNSScreenView *singleActiveScreen = [_activeScreens anyObject];
-    // restore interactions
-    singleActiveScreen.userInteractionEnabled = YES;
-    [singleActiveScreen notifyFinishTransitioning];
+  
+  if ((activeScreenRemoved || activeScreenAdded) && [_activeLimit intValue] == 1 && _activeScreens.count == 1) {
+    // for navigators that don't set the isTop value of screen because there is always only one active screen limit (bottom-tabs and drawer),
+    // we need to call notify from here to keep the old behavior working in them
+    if (![_activeScreens anyObject].isTop) {
+      [[_activeScreens anyObject] notifyFinishTransitioning];
+    }
   }
 
   if ((activeScreenRemoved || activeScreenAdded) && _controller.presentedViewController == nil && _controller.presentingViewController == nil) {
@@ -214,6 +219,8 @@
 }
 
 RCT_EXPORT_MODULE()
+
+RCT_EXPORT_VIEW_PROPERTY(activeLimit, NSNumber)
 
 - (UIView *)view
 {

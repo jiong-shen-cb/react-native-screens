@@ -56,6 +56,8 @@ typedef NS_ENUM(NSInteger, RNSScreenReplaceAnimation) {
 @property (nonatomic, readonly) BOOL dismissed;
 @property (nonatomic) BOOL active;
 @property (nonatomic) BOOL gestureEnabled;
+@property (nonatomic) BOOL isTransitioning;
+@property (nonatomic) BOOL isTop;
 @property (nonatomic) RNSScreenStackAnimation stackAnimation;
 @property (nonatomic) RNSScreenStackPresentation stackPresentation;
 @property (nonatomic) RNSScreenReplaceAnimation replaceAnimation;
