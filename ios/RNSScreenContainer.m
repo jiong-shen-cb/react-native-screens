@@ -163,14 +163,6 @@
       }
     }
   }
-  
-  if ((activeScreenRemoved || activeScreenAdded) && [_activeLimit intValue] == 1 && _activeScreens.count == 1) {
-    // for navigators that don't set the isTop value of screen because there is always only one active screen limit (bottom-tabs and drawer),
-    // we need to call notify from here to keep the old behavior working in them
-    if (![_activeScreens anyObject].isTop) {
-      [[_activeScreens anyObject] notifyFinishTransitioning];
-    }
-  }
 
   if ((activeScreenRemoved || activeScreenAdded) && _controller.presentedViewController == nil && _controller.presentingViewController == nil) {
     // if user has reachability enabled (one hand use) and the window is slided down the below

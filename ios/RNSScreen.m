@@ -166,7 +166,7 @@
 - (void)setIsTop:(BOOL)isTop
 {
   _isTop = isTop;
-  if (_isTop && !_transitioning) {
+  if (_isTop) {
     [self notifyFinishTransitioning];
   }
 }
