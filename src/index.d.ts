@@ -119,10 +119,6 @@ declare module 'react-native-screens' {
      * @description A prop that gives users an option to switch between using Screens for the navigator (container). All children screens should have the same value of their "enabled" prop as their container.
      */
     enabled?: boolean;
-    /**
-     * @description A prop that defines the number of desired active screens when there is no transition ongoing. Defaults to 1.
-     */
-    activeLimit?: number;
   }
 
   export interface ScreenStackProps extends ViewProps {

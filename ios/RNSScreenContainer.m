@@ -34,7 +34,6 @@
     _controller = [[UIViewController alloc] init];
     _needUpdate = NO;
     _manager = manager;
-    _activeLimit = [NSNumber numberWithInt:1];
     [self addSubview:_controller.view];
   }
   return self;
@@ -48,13 +47,6 @@
   if (!_needUpdate) {
     _needUpdate = YES;
     [_manager markUpdated:self];
-  }
-}
-
-- (void)setActiveLimit:(NSNumber *)activeLimit
-{
-  if ([activeLimit intValue] != [_activeLimit intValue]) {
-    _activeLimit = activeLimit;
   }
 }
 
@@ -211,8 +203,6 @@
 }
 
 RCT_EXPORT_MODULE()
-
-RCT_EXPORT_VIEW_PROPERTY(activeLimit, NSNumber)
 
 - (UIView *)view
 {

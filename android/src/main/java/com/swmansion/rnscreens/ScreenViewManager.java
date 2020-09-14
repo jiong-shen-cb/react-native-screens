@@ -31,6 +31,16 @@ public class ScreenViewManager extends ViewGroupManager<Screen> {
     view.setActive(active != 0);
   }
 
+  @ReactProp(name = "transitioning", defaultFloat = 0)
+  public void setTransitioning(Screen view, float transitioning) {
+    view.setTransitioning(transitioning == 1.0);
+  }
+
+  @ReactProp(name = "isTop")
+  public void setIsTop(Screen view, boolean isTop) {
+    view.setIsTop(isTop);
+  }
+
   @ReactProp(name = "stackPresentation")
   public void setStackPresentation(Screen view, String presentation) {
     if ("push".equals(presentation)) {

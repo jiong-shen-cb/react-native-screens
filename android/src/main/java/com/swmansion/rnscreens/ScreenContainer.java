@@ -351,16 +351,6 @@ public class ScreenContainer<T extends ScreenFragment> extends ViewGroup {
         }
       }
     }
-
-    // detect if we are "transitioning" based on the number of active screens
-    int activeScreens = 0;
-    for (int i = 0, size = mScreenFragments.size(); i < size; i++) {
-      if (isScreenActive(mScreenFragments.get(i))) {
-        activeScreens += 1;
-      }
-    }
-    boolean transitioning = activeScreens > 1;
-
     // attach newly activated screens
     boolean addedBefore = false;
     for (int i = 0, size = mScreenFragments.size(); i < size; i++) {
@@ -372,7 +362,6 @@ public class ScreenContainer<T extends ScreenFragment> extends ViewGroup {
       } else if (isActive && addedBefore) {
         moveToFront(screenFragment);
       }
-      screenFragment.getScreen().setTransitioning(transitioning);
     }
     tryCommitTransaction();
   }

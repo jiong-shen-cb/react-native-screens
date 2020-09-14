@@ -133,7 +133,7 @@ class Screen extends React.Component {
 
 class ScreenContainer extends React.Component {
   render() {
-    const { enabled = true, activeLimit = 1, ...rest } = this.props;
+    const { enabled = true, ...rest } = this.props;
 
     if (!ENABLE_SCREENS || !enabled) {
       return <View {...rest} />;
