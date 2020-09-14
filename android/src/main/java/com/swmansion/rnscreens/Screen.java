@@ -16,8 +16,6 @@ import com.facebook.react.bridge.GuardedRunnable;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.uimanager.UIManagerModule;
 
-import java.util.ArrayList;
-
 public class Screen extends ViewGroup {
 
   public enum StackPresentation {
@@ -157,9 +155,8 @@ public class Screen extends ViewGroup {
     if (mIsTop && mContainer != null) {
       // only the top screen should be transitioning, but we make sure it is the one
       // and then we change layer type for all screens in the container for during transitioning
-      ArrayList screenFragments = mContainer.mScreenFragments;
       for (int i = 0, size = mContainer.mScreenFragments.size(); i < size; i++) {
-        ScreenFragment screenFragment = (ScreenFragment) screenFragments.get(i);
+        ScreenFragment screenFragment = (ScreenFragment) mContainer.mScreenFragments.get(i);
         if (screenFragment != null) {
           screenFragment.mScreenView.changeLayerType(mTransitioning);
         }
