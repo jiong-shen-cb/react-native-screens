@@ -57,11 +57,11 @@ declare module 'react-native-screens' {
      */
     enabled?: boolean;
     /**
-     * @description Value indicating that this screen is currently transitioning.
+     * @description Value used to indicate if this screen is currently transitioning.
      */
     transitioning?: Animated.AnimatedInterpolation;
     /**
-     * @description Boolean saying if the current screen is currently on top. Used in stack navigator.
+     * @description Boolean saying if the current screen is currently visible/on top of the stack.
      */
     isTop?: boolean;
     /**
